@@ -8,6 +8,14 @@ const { schemas } = require("../../models/user");
 
 router.post("/register", validateBody(schemas.registerSchema), ctrl.register);
 
+router.get("/users/verify/:verificationToken", ctrl.verifyEmail);
+
+router.post(
+  "/users/verify",
+  validateBody(schemas.emailSchema),
+  ctrl.resendVerifyEmail
+);
+
 router.post("/login", validateBody(schemas.registerSchema), ctrl.login);
 
 router.post("/logout", authenticate, ctrl.logout);
